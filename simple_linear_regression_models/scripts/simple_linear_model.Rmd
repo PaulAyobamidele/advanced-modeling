@@ -1,0 +1,87 @@
+---
+title: "Illustrating Linear Regression in R"
+output: html_document
+---
+
+## Linear Regression Model in Action
+
+To illustrate the linear regression model in action, we generated 50 random values using the `rnorm` function.
+
+We also created our basic model of:
+
+\[
+y = mx + c
+\]
+
+where:
+
+- **y** is the response variable
+- **m** is the slope, the magnitude effect on the response variable as x changes
+- **c** is the baseline, or the intercept.
+
+### Introducing Error into the Equation
+
+We introduced error into the equation as follows:
+
+\[
+y = mx + c + \text{errors}
+\]
+
+### Fitting a Linear Model
+
+We generated a model by regressing `y` on `x`. Then, we predicted the values for the response variable using new `x` variables.
+
+### Using the `predict()` Function
+
+The `predict()` function is used to make predictions. It takes two inputs:
+
+1. The model, which forms the basis of predictions.
+2. The set of new values for which predictions are to be generated.
+
+#### Conditions for `predict()` to Work
+
+1. The array of new values to be predicted must be in the form of a dataframe or a tibble.
+2. The new tibble from above must be named exactly the same as the predictor variable in the model.
+
+## Using Tidyverse Functions for Linear Models
+
+### Steps:
+
+1. Put the data into a tibble and refit the model.
+2. Import the `broom` package.
+3. Use the following functions:
+   - `tidy()`: Provides a clean summary of the model.
+   - `glance()`: Displays model-level metrics.
+   - `augment()`: Adds predictions and residuals to the dataset.
+
+## Plotting the Model with ggplot2
+
+We can plot the model using `ggplot2` by utilizing the `geom_smooth()` function.
+
+## Understanding Model Notation: `y ~ x` and `y ~ 1 + x`
+
+The formula `y ~ x` is equivalent to `y ~ 1 + x`. This represents the model:
+
+\[
+y = mx + c
+\]
+
+Here, `y` is estimated not only by the slope (**m**, the magnitude of effect) but also the intercept (**c**), which assumes the value `1`.
+
+### Constructing an Intercept-Only Model
+
+To construct an intercept-only model, we use:
+
+\[
+y ~ 1
+\]
+
+This creates a "null model," which only includes one coefficient: the intercept.
+
+### Interpreting the Intercept
+
+The intercept represents the average value of the response variable when the slope is zero. Mathematically, this value is equal to the simple mean of `y`:
+
+\[
+\text{mean}(y) = \text{coef(null_mdl)}
+\]
